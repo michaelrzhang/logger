@@ -9,7 +9,7 @@ The lightweight logger is adapted from James Lucas.
 
 ## Usage
 
-Initialize by pointing the logger at a directory.
+Initialize by pointing the logger at a directory `log_dir`. The name should be something descriptive.
 
 ```python
 from exp_utils import ExperimentLogger
@@ -41,9 +41,11 @@ if logger.checkpoint_exists():
         optimizer.load_state_dict(checkpoint['optimizer'])
 
         print("Resuming training from epoch {}".format(start_epoch))
-        # set up decay
+        # set up learning rate scheduler again
         for i in range(start_epoch):
             scheduler.step()
 
         logger.update_tensorboard_writer(start_epoch)
 ```
+
+The logger checks to see if there is a checkpoint file in the relevant `log_dir`.
